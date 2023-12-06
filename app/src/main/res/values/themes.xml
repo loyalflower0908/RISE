@@ -1,0 +1,5 @@
+<resources>
+    <style name="Theme.LoginFire" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+</resources>

@@ -104,48 +104,62 @@ class MainActivity : ComponentActivity() {
                             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
                         )
                     }
+                    //투명 상단 상태바를 위한 코드
                     if(Build.VERSION.SDK_INT >= 30){
                         WindowCompat.setDecorFitsSystemWindows(window,false)
                     }
                     //키해쉬
 //                    var keyHash = Utility.getKeyHash(context = this@MainActivity)
 //                    Log.e(TAG, keyHash, null)
+                    //QR제작 유료 과금을 위한 다이얼로그를 관리하는 boolean
                     var showPayAlert by remember {
                         mutableStateOf(false)
                     }
+                    //QR제작 요청을 위한 다이얼로그를 관리하는 boolean
                     var showRequestAlert by remember {
                         mutableStateOf(false)
                     }
+                    //무료 이후 유료 확인을 위한 boolean
                     var payOn by remember {
                         mutableStateOf(false)
                     }
+                    //하단 네비게이션 바 선택 상태 관리 변수
                     var homeSelected by remember {
                         mutableStateOf(BarState.HOME)
                     }
+                    //로고 애니메이션 끝났는지 확인
                     var onLogoCompleteListner by remember {
                         mutableStateOf(false)
                     }
+                    //swing애니메이션이 완료되었는지 확인
                     var swingSwitch by remember {
                         mutableStateOf(false)
                     }
+                    //로그인 상태 관리
                     var isLogOut by remember {
                         mutableStateOf(false)
                     }
+                    //시작했는지 관리(메인 스크린)
                     var isStart by remember {
                         mutableStateOf(false)
                     }
+                    //로고 애니메이션의 완전한 종료를 위한 boolean
                     var logoOff by remember {
                         mutableStateOf(false)
                     }
+                    //QR제작 페이지 ON/OFF 관리
                     var makeQROn by remember {
                         mutableStateOf(false)
                     }
+                    //로고 Upload 완료했는지 체크 boolean
                     var logoUploadOn by remember {
                         mutableStateOf(false)
                     }
+                    //갤러리 페이지 ON/OFF 관리
                     var galleryPageOn by remember {
                         mutableStateOf(false)
                     }
+                    //QR제작시 입력값을 받기 위한 변수
                     var caption by remember {
                         mutableStateOf("")
                     }
@@ -160,10 +174,13 @@ class MainActivity : ComponentActivity() {
                             //toastMessage(applicationContext, "로그인 성공: ${token.accessToken}")
                         }
                     }
+                    //네비게이션 화면전환을 위한 컨트롤러
                     val navController = rememberNavController()
+                    //로그인 상태 관리
                     var isNotLogin by remember {
                         mutableStateOf(YET)
                     }
+                    //구글Auth클라이언트를 통해 유저 정보가 null이 아닐시에 이미 로그인으로 처리하고 메인페이지로 이외엔 로그인 안함으로 처리
                     LaunchedEffect(key1 = Unit) {
                         if(googleAuthUiClient.getSignedInUser() != null) {
                             isNotLogin = ALREADYLOGIN
@@ -172,7 +189,9 @@ class MainActivity : ComponentActivity() {
                             isNotLogin = NOT
                         }
                     }
+                    //화면전환 관리 네비게이션 호스트, 시작 지점은 SignInScreen
                     NavHost(navController = navController, startDestination = "sign_in") {
+                        //로그인 페이지
                         composable("sign_in") {
                             val viewModel = viewModel<SignInViewModel>()
                             val state by viewModel.state.collectAsStateWithLifecycle()
@@ -194,7 +213,7 @@ class MainActivity : ComponentActivity() {
                                     }
                                 }
                             )
-
+                            //로그인 성공상태면 메인 스크린으로 보냄
                             LaunchedEffect(key1 = state.isSignInSuccessful){
                                 if(state.isSignInSuccessful) {
 //                                    toastMessage(applicationContext,"로그인 성공")
@@ -207,6 +226,7 @@ class MainActivity : ComponentActivity() {
                                     viewModel.resetState()
                                 }
                             }
+                            //만약 로그인 상태가 아니라면 로그인 페이지로 로그인에서 버튼을 눌렀을때의 각각의 동작도 여기서 관리
                             if(isNotLogin == NOT){
                                 SignInScreen(
                                     state = state,
@@ -269,6 +289,7 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                         }
+                        //메인페이지
                         composable("main"){
                             homeSelected = BarState.HOME
                             MainScreen(isStart = isStart,
@@ -285,6 +306,7 @@ class MainActivity : ComponentActivity() {
                                     galleryPageOn = true
                                 })
                         }
+                        //프로필
                         composable("profile"){
                             homeSelected = BarState.MYPAGE
                             ProfileScreen(
@@ -500,7 +522,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
+//카카오 로그인 함수
 fun kakaoLogin(context:Context, callback:(OAuthToken?, Throwable?) -> Unit, goProfile: () -> Unit){
     if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
         UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
@@ -552,6 +574,7 @@ fun kakaoLogin(context:Context, callback:(OAuthToken?, Throwable?) -> Unit, goPr
                         }
                         val email = "KAKAO${user.kakaoAccount?.email}" ?: "kakaoExample@kakao.com"
                         val uid = "kakaoA${user.id}"
+                        //카카오에서 받아온 유저 정보를 firebase auth에서 한 번에 관리를 위해 그 이메일과 uid로 등록
                         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, uid)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
@@ -613,7 +636,7 @@ fun kakaoLogin(context:Context, callback:(OAuthToken?, Throwable?) -> Unit, goPr
     }
 
 }
-
+//깃헙 로그인 함수
 fun signInGithub(activity: Activity, signUpDone: () -> Unit){
     val firebaseAuth = FirebaseAuth.getInstance()
     val provider = OAuthProvider.newBuilder("github.com")

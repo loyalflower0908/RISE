@@ -59,3 +59,7 @@ _____________________________________________________
 Jetpack Compose, Firebase Authentication, Firebase Storage, Firebase RealtimeDB, Kakao SDK(Login), Lottie, Retrofit2
 
 &nbsp;
+
+_____________________________________________________
+### 🕐 개발 소요 시간 🕐
+4일

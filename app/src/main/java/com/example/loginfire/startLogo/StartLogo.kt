@@ -37,6 +37,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+//처음 스타트 로고 스플래시 스크린 코드
+
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun StartLogo(logoComplete:() -> Unit, swingSwitch:Boolean){
@@ -47,7 +49,7 @@ fun StartLogo(logoComplete:() -> Unit, swingSwitch:Boolean){
     val sunsetPainter3 = painterResource(id = R.drawable.sunset3)
     val sunsetPainter4 = painterResource(id = R.drawable.sunset4)
     val sunsetPainter5 = painterResource(id = R.drawable.sunset5)
-
+    //애니메이션용 스위치와 상태 변수들
     var swingSwitch2 by remember {
         mutableStateOf(false)
     }
@@ -149,6 +151,7 @@ fun StartLogo(logoComplete:() -> Unit, swingSwitch:Boolean){
         animationSpec = tween(durationMillis = 2200, delayMillis = 1000, easing = FastOutSlowInEasing),
         label = "swing")
     val swing = 0.0009*((swingAnimate-swingState/2)*(swingAnimate-swingState/2)-(swingState/2)*(swingState/2))
+    //화면 구성
     Box(modifier = Modifier
         .fillMaxSize()
         .background(colorAnimate)){
@@ -212,6 +215,7 @@ fun StartLogo(logoComplete:() -> Unit, swingSwitch:Boolean){
                 .padding(top = 196.dp)
                 .alpha(rise2FloatAnimate - rise3FloatAnimate))
         }
+        //애니메이션 관리
         LaunchedEffect(key1 = Unit){
             sunYState = 0.dp
             delay(1500)

@@ -37,6 +37,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+//로그인된 상태에서의 스플래시 스크린
+
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun StartLogo2(logoComplete:() -> Unit){
@@ -50,6 +52,7 @@ fun StartLogo2(logoComplete:() -> Unit){
     val risePainter = painterResource(id = R.drawable.rise1)
 
     val halfscreenHeight = (LocalConfiguration.current.screenHeightDp/2-300).dp
+    //애니메이션용 스위치와 상태 변수들
     var sunYState by remember {
         mutableStateOf(320.dp)
     }
@@ -139,7 +142,9 @@ fun StartLogo2(logoComplete:() -> Unit){
     val swingAnimate by animateIntAsState(targetValue = swingState,
         animationSpec = tween(durationMillis = 2200, easing = FastOutSlowInEasing),
         label = "swing")
+    //애니메이션 움직임 값(2차 방정식)
     val swing = 0.0009*((swingAnimate-swingState/2)*(swingAnimate-swingState/2)-(swingState/2)*(swingState/2))
+    //화면  구성
     Box(modifier = Modifier
         .fillMaxSize()
         .background(colorAnimate)){
@@ -206,6 +211,7 @@ fun StartLogo2(logoComplete:() -> Unit){
                 .padding(bottom = 120.dp)
                 .alpha(riseFloatAnimate - rise2FloatAnimate))
         }
+        //애니메이션 관리
         LaunchedEffect(key1 = Unit){
             logoChange2 = true
             sunYState = 0.dp

@@ -150,6 +150,7 @@ fun StartLogo(logoComplete:() -> Unit, swingSwitch:Boolean){
     val swingAnimate by animateIntAsState(targetValue = swingState,
         animationSpec = tween(durationMillis = 2200, delayMillis = 1000, easing = FastOutSlowInEasing),
         label = "swing")
+    //애니메이션 움직임 값(2차 방정식)
     val swing = 0.0009*((swingAnimate-swingState/2)*(swingAnimate-swingState/2)-(swingState/2)*(swingState/2))
     //화면 구성
     Box(modifier = Modifier

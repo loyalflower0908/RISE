@@ -34,7 +34,17 @@ blip2와 QR code Monster 모델을 서버에 띄우고(서버 코드는 해당 �
 _____________________________________________________
 ### 스크린샷
    
+<div style="display: flex; flex-direction: row;">
+    <img src="https://github.com/loyalflower0908/RISE/assets/142879940/8409a711-c025-40c6-84a5-29a67fa87d77" width="30%" height="30%" style="margin: 0 10px;">
+    <img src="https://github.com/loyalflower0908/RISE/assets/142879940/e0ee6a9b-ac34-4d10-9bb4-3673cf8d9b59" width="30%" height="30%" style="margin: 0 10px;">
+    <img src="https://github.com/loyalflower0908/RISE/assets/142879940/7e6822ee-af2d-4871-911e-0ad6fb5060e5" width="30%" height="30%" style="margin: 0 10px;">
+</div>
 
+<div style="display: flex; flex-direction: row;">
+    <img src="https://github.com/loyalflower0908/RISE/assets/142879940/5abf4bfa-d481-4047-a026-d1e26e64fd58" width="30%" height="30%" style="margin: 0 10px;">
+    <img src="https://github.com/loyalflower0908/RISE/assets/142879940/d41de9ed-7963-45cb-8613-e904dfe760d4" width="30%" height="30%" style="margin: 0 10px;">
+    <img src="https://github.com/loyalflower0908/RISE/assets/142879940/3307e75a-dcc5-4be3-b650-f04e87408506" width="30%" height="30%" style="margin: 0 10px;">
+</div>
 
 &nbsp;
    

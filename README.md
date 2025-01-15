@@ -71,5 +71,5 @@ Jetpack Compose, Firebase Authentication, Firebase Storage, Firebase RealtimeDB,
 &nbsp;
 
 _____________________________________________________
-### 🕐 개발 소요 시간 🕐
-4일
+### 🕐 개발 기간 🕐
+2023.11.27 ~ 12/04
